@@ -1,0 +1,30 @@
+﻿@model CT.Sfa.MvcWebUI.Models.ProductListViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Number</th>
+            <th>Product</th>
+        </tr>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <th>@item.ID_MAMUL</th>
+                <th>@item.MAMUL_NO</th>
+                <th>@item.DS_MAMUL</th>
+            </tr>
+        }
+    </table>
+</body>
+</html>
