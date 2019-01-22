@@ -11,9 +11,9 @@ namespace CT.Sfa.Entities.Concrete
     public class Product:IEntity
     {
         //[Key]
-        public int ID_MAMUL { get; set; }
-        public string DS_MAMUL { get; set; }
-        public string MAMUL_NO { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductNo { get; set; }
 
     }
 }

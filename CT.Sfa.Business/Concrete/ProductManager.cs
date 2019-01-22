@@ -22,7 +22,7 @@ namespace CT.Sfa.Business.Concrete
 
         public void Delete(int productId)
         {
-            _productDal.Delete(new Product { ID_MAMUL = productId });
+            _productDal.Delete(new Product { ProductId = productId });
         }
 
         public List<Product> GetAll()
@@ -38,12 +38,12 @@ namespace CT.Sfa.Business.Concrete
         public Product GetById(int productId)
         {
 
-            return _productDal.Get(p => p.ID_MAMUL == productId);
+            return _productDal.Get(p => p.ProductId == productId);
         }
 
         public List<Product> GetProductListStarsWith(string letter)
         {
-            return _productDal.GetAll(p => p.DS_MAMUL.StartsWith(letter));
+            return _productDal.GetAll(p => p.ProductName.StartsWith(letter));
         }
 
         public void Update(Product product)
