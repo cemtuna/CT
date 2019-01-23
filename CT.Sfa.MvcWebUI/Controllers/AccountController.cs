@@ -101,11 +101,26 @@ namespace CT.Sfa.MvcWebUI.Controllers
             var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError(string.Empty, "Login failed");
             return View(loginViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await _signInManager.SignOutAsync();
+                
+                return RedirectToAction("Login", "Account");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }

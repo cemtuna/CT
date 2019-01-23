@@ -65,7 +65,7 @@ namespace CT.Sfa.MvcWebUI
             });
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
+                //options.LogoutPath = "/Account/Logout";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
                 options.Cookie = new CookieBuilder
