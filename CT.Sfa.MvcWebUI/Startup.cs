@@ -40,6 +40,12 @@ namespace CT.Sfa.MvcWebUI
                .AddEntityFrameworkStores<AccountDbContext>()
                .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess", "1"));
+            });
+
             services.AddSession();
             services.AddDistributedMemoryCache();
 
@@ -98,7 +104,7 @@ namespace CT.Sfa.MvcWebUI
 
         private void configureRoutes(IRouteBuilder routeBuilder)
         {
-            routeBuilder.MapRoute("Default", "{controller=account}/{action=index}/{id?}");
+            routeBuilder.MapRoute("Default", "{controller=home}/{action=index}/{id?}");
         }
     }
 }
