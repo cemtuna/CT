@@ -7,6 +7,7 @@ using CT.Sfa.Business.Concrete;
 using CT.Sfa.DataAccess.Abstract;
 using CT.Sfa.DataAccess.Concrete.EntityFramework;
 using CT.Sfa.MvcWebUI.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,9 +33,15 @@ namespace CT.Sfa.MvcWebUI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSingleton<IAuthorizationService, AuthorizationService>();
+
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IProductDal, EfProductDal>();
-            //services.AddDbContext<AppContext>(options => options.UseOracle(_configuration.GetConnectionString("Dss")));
+
+            services.AddScoped<IMenuService, MenuManager>();
+            services.AddScoped<IMenuDal, EfMenuDal>();
+
+
             services.AddDbContext<AccountDbContext>(options => options.UseOracle(_configuration.GetConnectionString("Dss")));
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<AccountDbContext>()
@@ -44,6 +51,7 @@ namespace CT.Sfa.MvcWebUI
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess", "1"));
+                //options.AddPolicy("RequireMenuAccess", policy => policy.RequireClaim("3", "1"));
             });
 
             services.AddSession();
@@ -71,7 +79,7 @@ namespace CT.Sfa.MvcWebUI
             });
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Account/Login";
-                //options.LogoutPath = "/Account/Logout";
+                //options.SignoutPath = "/Account/Signout";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
                 options.Cookie = new CookieBuilder
@@ -97,6 +105,7 @@ namespace CT.Sfa.MvcWebUI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseSession();
             app.UseAuthentication();
             app.UseMvc(configureRoutes);

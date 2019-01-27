@@ -1,29 +1,14 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Welcome Home";
+    Layout = "~/Views/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h4>Hello, @User.Identity.Name</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form method="post">
-                <div class="form-group">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <input type="submit" value="Sign Out" class="btn btn-default" asp-controller="Account" asp-action="LogOut" />
-                    }
-                </div>
-            </form>
-        </div>
+<form method="post">
+    <div class="form-group">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <input type="submit" value="Sign Out" class="btn btn-default" asp-controller="Account" asp-action="Signout" />
+        }
     </div>
-</body>
-</html>
+</form>

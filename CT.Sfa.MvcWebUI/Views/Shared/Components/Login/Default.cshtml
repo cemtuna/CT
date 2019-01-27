@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<form class="form-inline my-2 my-lg-0" method="post">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @User.Identity.Name
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" asp-controller="account" asp-action="profile">My Profile</a>
+                    <a class="dropdown-item" asp-controller="account" asp-action="resetpassword">Reset Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("Signout", "Account")">Sign Out</a>
+                </div>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-outline-success" type="submit" asp-controller="account" asp-action="register">Register</button>
+            <button class="btn btn-outline-success" type="submit" asp-controller="account" asp-action="login">Sign In</button>
+        </div>
+    }
+</form>

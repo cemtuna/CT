@@ -132,7 +132,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Signout()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -264,6 +264,12 @@ namespace CT.Sfa.MvcWebUI.Controllers
 
 
             return RedirectToAction("Index", "Product");
+        }
+
+        public IActionResult ResetPassword()
+        {
+            //private IAuthorizationService _authorizationService;
+            return View();
         }
     }
 }

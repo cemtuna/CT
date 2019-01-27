@@ -28,10 +28,23 @@ namespace CT.Sfa.DataAccess.Concrete.EntityFramework
                 entity.Property(e => e.ProductNo).HasColumnName("MAMUL_NO");
             });
 
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.HasKey(e => e.MenuId).HasName("PK_ID_CEM_MENU");
+                entity.ToTable("CEM_MENU");
+                entity.Property(e => e.MenuId).HasColumnName("MENU_ID");
+                entity.Property(e => e.MenuName).HasColumnName("MENU_NAME");
+                entity.Property(e => e.ParentMenu).HasColumnName("PARENT_MENU");
+                entity.Property(e => e.Controller).HasColumnName("CONTROLLER");
+                entity.Property(e => e.Action).HasColumnName("ACTION");
+                entity.Property(e => e.RowNumber).HasColumnName("ROW_NUMBER");
+            });
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Menu> Menus { get; set; }
 
     }
 }

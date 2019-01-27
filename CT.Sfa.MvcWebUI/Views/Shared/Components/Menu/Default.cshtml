@@ -1,0 +1,43 @@
+﻿@*@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService*@
+@model CT.Sfa.MvcWebUI.Models.MenuViewModel
+@{
+    Layout = null;
+}
+
+
+<ul class="navbar-nav mr-auto">
+    @foreach (var item in Model.Menus.Where(f => f.ParentMenu == 0).OrderBy(f => f.RowNumber).ToList())
+    {
+        if (true)
+        {
+            if (Model.Menus.Exists(f => f.ParentMenu == item.MenuId))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @item.MenuName
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                        @foreach (var item2 in Model.Menus.Where(f => f.ParentMenu == item.MenuId).OrderBy(f => f.RowNumber).ToList())
+                        {
+                            <a class="dropdown-item" asp-controller=@item2.Controller asp-action=@item2.Action>@item2.MenuName</a>
+                        }
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller=@item.Controller asp-action=@item.Action>@item.MenuName</a>
+                </li>
+            }
+        }
+
+
+        @*<li class="nav-item">
+                <a class="nav-link" asp-controller="product" asp-action="index">Products<span class="sr-only">(current)</span></a>
+            </li>*@
+    }
+</ul>
+
+
