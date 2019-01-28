@@ -50,8 +50,8 @@ namespace CT.Sfa.MvcWebUI
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess", "1"));
-                //options.AddPolicy("RequireMenuAccess", policy => policy.RequireClaim("3", "1"));
+                options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess"));
+                //options.AddPolicy("RequireMenuAccess", policy => policy.RequireClaim("MenuAccess"));
             });
 
             services.AddSession();
@@ -74,8 +74,8 @@ namespace CT.Sfa.MvcWebUI
 
                 options.User.RequireUniqueEmail = true;
 
-                options.SignIn.RequireConfirmedEmail = true;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
+                //options.SignIn.RequireConfirmedEmail = true;
+                //options.SignIn.RequireConfirmedPhoneNumber = false;
             });
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Account/Login";

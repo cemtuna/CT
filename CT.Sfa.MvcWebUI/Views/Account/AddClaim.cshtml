@@ -28,6 +28,11 @@
                 <span asp-validation-for="ClaimName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ClaimValue" class="control-label"></label>
+                <input asp-for="ClaimValue" class="form-control" placeholder="ClaimValue" />
+                <span asp-validation-for="ClaimValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-success" type="submit">Approve</button>
             </div>
         </form>

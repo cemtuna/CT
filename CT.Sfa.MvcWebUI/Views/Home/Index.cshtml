@@ -1,19 +1,37 @@
 ﻿
 @{
-    ViewBag.Title = "Welcome Home";
+    ViewBag.Title = "Home";
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<form method="post">
-    <div class="form-group">
+
+
+@section Content  {
+    <div class="jumbotron">
         @if (User.Identity.IsAuthenticated)
         {
-            ViewBag.Title = ViewBag.Title + ", " + User.Identity.Name;
-            <input type="submit" value="Sign Out" class="btn btn-default" asp-controller="Account" asp-action="Signout" />
+            <h1 class="display-4">Hello, @User.Identity.Name</h1>
         }
         else
         {
-            <input type="submit" value="Sign In" class="btn btn-default" asp-controller="Account" asp-action="Login" />
+            <h1 class="display-4">Hello, world!</h1>
         }
+
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+        <form method="get">
+            <div class="form-group">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <input type="submit" value="Sign Out" class="btn btn-default" asp-controller="Account" asp-action="Signout" />
+                }
+                else
+                {
+                    <input type="submit" value="Sign In" class="btn btn-default" asp-controller="Account" asp-action="Login" />
+                }
+            </div>
+        </form>
     </div>
-</form>
+}

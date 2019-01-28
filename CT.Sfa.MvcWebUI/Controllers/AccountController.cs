@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CT.Sfa.MvcWebUI.Controllers
 {
+
     public class AccountController : Controller
     {
         private UserManager<User> _userManager;
@@ -220,7 +221,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
                 UserList = _userManager.Users.ToList(),
                 RoleList = _roleManager.Roles.ToList()
             };
-                        
+
 
             return View(model);
         }
@@ -234,7 +235,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
                 return View(addClaimViewModel);
             }
 
-            var claim = new Claim(addClaimViewModel.ClaimName, "1");
+            var claim = new Claim(addClaimViewModel.ClaimName, addClaimViewModel.ClaimValue);
 
             if (!string.IsNullOrEmpty(addClaimViewModel.UserName))
             {
@@ -269,5 +270,23 @@ namespace CT.Sfa.MvcWebUI.Controllers
             //private IAuthorizationService _authorizationService;
             return View();
         }
+
+        [Authorize(Policy = "RequireAdministratorRole")]
+        public IActionResult Index()
+        {
+            var userViewModel = new UserListViewModel
+            {
+                Users = _userManager.Users.ToList()
+            };
+            return View(userViewModel);
+        }
+
+        [Authorize]
+        public IActionResult Update(string userId)
+        {
+            var user = _userManager.Users.Where(f => f.Id == userId).FirstOrDefault();
+            return View(user);
+        }
+
     }
 }

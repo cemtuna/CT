@@ -1,0 +1,42 @@
+﻿@model CT.Sfa.MvcWebUI.Models.Account.UserListViewModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<form method="post">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>User Name</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Birth Date</th>
+                    <th>Firm Id</th>
+                    <th>Dealer Id</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>@item.UserFull</td>
+                    <td>@item.Email</td>
+                    <td>@item.BirthDate</td>
+                    <td>@item.FirmId</td>
+                    <td>@item.DealerId</td>
+                    <td>
+                        @*<div class="btn-group" role="group" aria-label="Basic example">
+                            <button class="btn btn-secondary" type="button" asp-controller="account" asp-action="update">Update</button>
+                            <button class="btn btn-danger" type="button" asp-controller="account" asp-action="delete">Delete</button>
+                        </div>*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</form>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CT.Sfa.MvcWebUI.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,10 @@ namespace CT.Sfa.MvcWebUI.ViewComponents
 {
     public class LoginViewComponent:ViewComponent
     {
-        public LoginViewComponent()
+        private UserManager<User> _userManager;
+        public LoginViewComponent(UserManager<User> userManager)
         {
-
+            _userManager = userManager;
         }
 
         public ViewViewComponentResult Invoke()
