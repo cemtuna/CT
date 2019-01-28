@@ -8,7 +8,12 @@
     <div class="form-group">
         @if (User.Identity.IsAuthenticated)
         {
+            ViewBag.Title = ViewBag.Title + ", " + User.Identity.Name;
             <input type="submit" value="Sign Out" class="btn btn-default" asp-controller="Account" asp-action="Signout" />
+        }
+        else
+        {
+            <input type="submit" value="Sign In" class="btn btn-default" asp-controller="Account" asp-action="Login" />
         }
     </div>
 </form>

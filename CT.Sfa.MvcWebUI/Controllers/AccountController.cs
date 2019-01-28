@@ -131,14 +131,12 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return View(loginViewModel);
         }
 
-        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Signout()
         {
             if (User.Identity.IsAuthenticated)
             {
                 await _signInManager.SignOutAsync();
-
-                return RedirectToAction("Login", "Account");
             }
 
             return RedirectToAction("Index", "Home");
