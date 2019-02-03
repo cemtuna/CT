@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CT.Sfa.MvcWebUI.Controllers
 {
-    
+
     [Authorize(Policy = "RequireProductAccess")]
     public class ProductController : Controller
     {

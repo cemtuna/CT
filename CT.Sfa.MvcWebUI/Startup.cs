@@ -7,6 +7,7 @@ using CT.Sfa.Business.Concrete;
 using CT.Sfa.DataAccess.Abstract;
 using CT.Sfa.DataAccess.Concrete.EntityFramework;
 using CT.Sfa.MvcWebUI.Entities;
+using CT.Sfa.MvcWebUI.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,8 +42,11 @@ namespace CT.Sfa.MvcWebUI
             services.AddScoped<IMenuService, MenuManager>();
             services.AddScoped<IMenuDal, EfMenuDal>();
 
+            services.AddTransient<IAuthorizationHandler, DomainHandler>();
+
 
             services.AddDbContext<AccountDbContext>(options => options.UseOracle(_configuration.GetConnectionString("Dss")));
+
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<AccountDbContext>()
                .AddDefaultTokenProviders();
@@ -51,6 +55,7 @@ namespace CT.Sfa.MvcWebUI
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess"));
+                options.AddPolicy("DomainPolicy", policy => policy.Requirements.Add(new DomainRequirement("gmail.com")));
                 //options.AddPolicy("RequireMenuAccess", policy => policy.RequireClaim("MenuAccess"));
             });
 
