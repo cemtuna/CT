@@ -271,8 +271,8 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return View();
         }
 
-        //[Authorize(Policy = "RequireAdministratorRole")]
-        [Authorize(Policy = "DomainPolicy")]
+        [Authorize(Policy = "RequireAdministratorRole")]
+        //[Authorize(Policy = "DomainPolicy")]
         public IActionResult Index()
         {
             var userViewModel = new UserListViewModel
