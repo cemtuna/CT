@@ -42,7 +42,8 @@ namespace CT.Sfa.MvcWebUI
             services.AddScoped<IMenuService, MenuManager>();
             services.AddScoped<IMenuDal, EfMenuDal>();
 
-            services.AddTransient<IAuthorizationHandler, DomainHandler>();
+            //services.AddTransient<IAuthorizationHandler, DomainHandler>();
+            services.AddTransient<IAuthorizationHandler, AccessHandler>();
 
 
             services.AddDbContext<AccountDbContext>(options => options.UseOracle(_configuration.GetConnectionString("Dss")));
@@ -54,9 +55,9 @@ namespace CT.Sfa.MvcWebUI
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess"));
-                options.AddPolicy("DomainPolicy", policy => policy.Requirements.Add(new DomainRequirement("gmail.com")));
-                //options.AddPolicy("RequireMenuAccess", policy => policy.RequireClaim("MenuAccess"));
+                //options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess"));
+                //options.AddPolicy("DomainPolicy", policy => policy.Requirements.Add(new DomainRequirement("gmail.com")));
+                options.AddPolicy("AccessPolicy", policy => policy.Requirements.Add(new AccessRequirement("Product","Index")));
             });
 
             services.AddSession();

@@ -4,37 +4,37 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<form method="post">
-    <button class="btn btn-success" type="submit" asp-controller="product" asp-action="add">Create Product</button>
-    <br />
-    <br />
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead class="thead-light">
-                <tr>
-                    <th>Product Id</th>
-                    <th>Product Number</th>
-                    <th>Product</th>
-                    <th></th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.Products)
-            {
-                <tr>
-                    <td>@item.ProductId</td>
-                    <td>@item.ProductNo</td>
-                    <td>@item.ProductName</td>
-                    @*<td><a class="btn btn-xs btn-" asp-controller="product" asp-action="update" asp-route-productid="@item.ProductId">Update</a></td>
-                        <td><a class="btn btn-xs btn-danger" asp-controller="product" asp-action="delete" asp-route-productid="@item.ProductId">Delete</a></td>*@
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-secondary" type="submit" asp-controller="product" asp-action="update">Update</button>
-                            <button class="btn btn-danger" type="submit" asp-controller="product" asp-action="delete">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-</form>
-
+@*<button class="btn btn-success" type="submit" asp-controller="product" asp-action="add">Create Product</button>*@
+<a class="btn btn-xs btn-success" asp-controller="product" asp-action="add">Create Product</a>
+<br />
+<br />
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Product Id</th>
+                <th>Product Number</th>
+                <th>Product</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductNo</td>
+                <td>@item.ProductName</td>
+                @*<td><a class="btn btn-xs btn-" asp-controller="product" asp-action="update" asp-route-productid="@item.ProductId">Update</a></td>
+                    <td><a class="btn btn-xs btn-danger" asp-controller="product" asp-action="delete" asp-route-productid="@item.ProductId">Delete</a></td>*@
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        @*<button class="btn btn-secondary" type="submit" asp-controller="product" asp-action="update" asp-route-productId="@item.ProductId">Update</button>
+                        <button class="btn btn-danger" asp-controller="product" asp-action="delete" asp-route-productId="@item.ProductId">Delete</button>*@
+                        <a class="btn btn-xs btn-info" asp-authorize asp-controller="product" asp-action="Update" asp-route-productId="@item.ProductId">Update</a>
+                        <a class="btn btn-xs btn-danger" asp-authorize asp-controller="product" asp-action="Delete" asp-route-productId="@item.ProductId">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

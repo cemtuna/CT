@@ -262,7 +262,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
 
 
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ResetPassword()
