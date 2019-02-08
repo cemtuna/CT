@@ -5,7 +5,7 @@
 }
 
 @*<button class="btn btn-success" type="submit" asp-controller="product" asp-action="add">Create Product</button>*@
-<a class="btn btn-xs btn-success" asp-controller="product" asp-action="add">Create Product</a>
+<a class="btn btn-xs btn-success" asp-authorize asp-policy="ProductAddPolicy" asp-controller="product" asp-action="add">Create Product</a>
 <br />
 <br />
 <div class="table-responsive">
@@ -30,8 +30,8 @@
                     <div class="btn-group" role="group" aria-label="Basic example">
                         @*<button class="btn btn-secondary" type="submit" asp-controller="product" asp-action="update" asp-route-productId="@item.ProductId">Update</button>
                         <button class="btn btn-danger" asp-controller="product" asp-action="delete" asp-route-productId="@item.ProductId">Delete</button>*@
-                        <a class="btn btn-xs btn-info" asp-authorize asp-controller="product" asp-action="Update" asp-route-productId="@item.ProductId">Update</a>
-                        <a class="btn btn-xs btn-danger" asp-authorize asp-controller="product" asp-action="Delete" asp-route-productId="@item.ProductId">Delete</a>
+                        <a class="btn btn-xs btn-info" asp-authorize asp-policy="ProductUpdatePolicy" asp-controller="product" asp-action="Update" asp-route-productId="@item.ProductId">Update</a>
+                        <a class="btn btn-xs btn-danger" asp-authorize asp-policy="ProductDeletePolicy" asp-controller="product" asp-action="Delete" asp-route-productId="@item.ProductId">Delete</a>
                     </div>
                 </td>
             </tr>

@@ -57,7 +57,10 @@ namespace CT.Sfa.MvcWebUI
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin"));
                 //options.AddPolicy("RequireProductAccess", policy => policy.RequireClaim("ProductAccess"));
                 //options.AddPolicy("DomainPolicy", policy => policy.Requirements.Add(new DomainRequirement("gmail.com")));
-                options.AddPolicy("AccessPolicy", policy => policy.Requirements.Add(new AccessRequirement("Product","Index")));
+                options.AddPolicy("ProductIndexPolicy", policy => policy.Requirements.Add(new AccessRequirement("Product","Index")));
+                options.AddPolicy("ProductUpdatePolicy", policy => policy.Requirements.Add(new AccessRequirement("Product", "Update")));
+                options.AddPolicy("ProductAddPolicy", policy => policy.Requirements.Add(new AccessRequirement("Product", "Add")));
+                options.AddPolicy("ProductDeletePolicy", policy => policy.Requirements.Add(new AccessRequirement("Product", "Delete")));
             });
 
             services.AddSession();

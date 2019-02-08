@@ -20,17 +20,18 @@ namespace CT.Sfa.MvcWebUI.Controllers
             _productService = productService;
         }
 
-        [Authorize(Policy = "AccessPolicy")]
+        [Authorize(Policy = "ProductIndexPolicy")]
         public IActionResult Index()
         {
             //var products = _productService.GetProductListStarsWith("A");
             var model = new ProductListViewModel
             {
-                Products = _productService.GetAll()
+                Products = _productService.GetProductListStarsWith("AL")
             };
             return View(model);
         }
 
+        [Authorize(Policy = "ProductAddPolicy")]
         public IActionResult Add()
         {
             var model = new ProductAddViewModel
@@ -40,6 +41,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "ProductAddPolicy")]
         [HttpPost]
         public ActionResult Add(ProductAddViewModel model)
         {
@@ -51,6 +53,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Policy = "ProductUpdatePolicy")]
         public IActionResult Update(int productId)
         {
             var model = new ProductUpdateViewModel
@@ -60,6 +63,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "ProductUpdatePolicy")]
         [HttpPost]
         public ActionResult Update(ProductUpdateViewModel model)
         {
@@ -71,6 +75,7 @@ namespace CT.Sfa.MvcWebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Policy = "ProductDeletePolicy")]
         public ActionResult Delete(int productId)
         {
             _productService.Delete(productId);
